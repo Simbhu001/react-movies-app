@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import { logIn } from '../../redux/slice/user.slice';
-
+import { toast, ToastContainer } from 'react-toastify';
 
 const loginSchema = Yup.object().shape({
     username: Yup.string()
@@ -37,9 +37,11 @@ export default function SignIn() {
 
 
         if (logUser === defaultUserName && logPwd === defaultPassword) {
-            dispatch(logIn(true))
+            dispatch(logIn(true));
+            toast.success('User Login Successfully');
             return navigate('/home');
         } else {
+            toast.error('Bad Credentials ! check it..')
             return navigate('/');
         }
     }
@@ -98,6 +100,7 @@ export default function SignIn() {
                     <div className='col-xs-1 col-sm-2 col-md-3'></div>
                 </div>
             </div>
+            <ToastContainer position="top-right" />
         </>
     )
 }

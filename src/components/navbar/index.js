@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Cinema from '../../assets/c.png';
 import { logIn } from '../../redux/slice/user.slice';
 import { Link } from 'react-router-dom'
+import { toast, ToastContainer } from 'react-toastify';
 
 export default function NavBar() {
     const dispatch = useDispatch();
@@ -32,6 +33,7 @@ export default function NavBar() {
                                         style={{ textDecoration: 'none', fontSize: '1.3rem' }}
                                         to={'/'}
                                         onClick={() => {
+                                            toast.success("User LogOut Successfully");
                                             dispatch(logIn(false));
                                             localStorage.removeItem('isLogUsername');
                                             localStorage.removeItem('isLogPassword');
@@ -44,6 +46,18 @@ export default function NavBar() {
                 }
 
             </Navbar>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     )
 }
